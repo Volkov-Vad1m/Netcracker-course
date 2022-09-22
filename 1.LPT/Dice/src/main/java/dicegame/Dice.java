@@ -21,6 +21,10 @@ public class Dice {
         this.cubes = cubes;
     }
 ////////////////////////////////////////////////////////////////
+
+    /**
+     * Main class method.
+     */
     public void play() {
 
         while(!someoneWon()) {
@@ -65,7 +69,7 @@ public class Dice {
     }
 
     /**
-     * This method ends round correctly.
+     * This method ends round correctly. It prints who has won, sets scores, prints it and moves array of players.
      */
     private void endRound() {
         int firstWinner = indexMax();
@@ -79,9 +83,12 @@ public class Dice {
         players[firstWinner].setScore(players[firstWinner].getScore() + 1);
 
         dumpScores();
-        moveRight(players.length - firstWinner);
+        moveArray(players.length - firstWinner);
     }
 
+    /**
+     * @return index of player, who had the highest toss result
+     */
     private int indexMax() {
 
         int max = 0;
@@ -95,6 +102,9 @@ public class Dice {
         return index;
     }
 
+    /**
+     * method prints scores
+     */
     private void dumpScores(){
         System.out.println("-----------------scores-----------------");
         for(Player player: players) {
@@ -107,7 +117,10 @@ public class Dice {
         System.out.println("----------------------------------------");
     }
 
-    private void moveRight(int positions) {
+    /**
+     * Method moves array after round so that the first position will be the winner.
+     */
+    private void moveArray(int positions) {
         int size = players.length;
         for (int i = 0; i < positions; i++) {
             Player temp = players[size - 1];

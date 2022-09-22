@@ -1,41 +1,48 @@
 package wolf;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.Calendar;
 import java.util.Vector;
 
 public class Person {
 
-    private String firsName;
-    private String lastName;
+    private String name;
+    private String surname;
     private Calendar birthDay;
     private Address address;
 
-    public Person(String firsName, String lastName, Calendar birthDay, Address address) {
-        this.firsName = firsName;
-        this.lastName = lastName;
+
+
+    /////////////////////////////////////////////////////////
+    public Person(@NotNull String name, @NotNull String surname, @NotNull Calendar birthDay, @NotNull Address address) {
+        this.name = name;
+        this.surname = surname;
         this.birthDay = birthDay;
         this.address = address;
     }
-    
-    public Person(String firsName, String lastName, int year, int month, int day, Address address) {
-        this(firsName, lastName, Calendar.getInstance(), address);
+
+    public Person(@NotNull String name, @NotNull String surname, int year, int month, int day, @NotNull Address address) {
+        this(name, surname, Calendar.getInstance(), address);
         this.birthDay.set(year, month - 1, day);
+
     }
 
-    public String getFirsName() {
-        return firsName;
+    /////////////////////////////////////////////////////////
+    public String getName() {
+        return surname;
     }
 
-    public void setFirsName(String firsName) {
-        this.firsName = firsName;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getLastName() {
-        return lastName;
+    public String getSurname() {
+        return surname;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setSurname(String surname) {
+        this.surname = surname;
     }
 
     public Calendar getBirthDay() {
@@ -53,6 +60,26 @@ public class Person {
     public void setAddress(Address address) {
         this.address = address;
     }
+    /////////////////////////////////////////////////////////
+
+    public static Person searchLastName(Person[] people, String surname) {
+        for(Person person : people) {
+            if(person.surname.equals(surname)) {
+                return person;
+            }
+        }
+        return null;
+    }
+
+
+    @Override
+    public String toString() {
+        return name + " " + surname;
+    }
+
+
+
+
 
 
 }
