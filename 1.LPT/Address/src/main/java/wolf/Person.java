@@ -12,9 +12,7 @@ public class Person {
     private Calendar birthDay;
     private Address address;
 
-
-
-    /////////////////////////////////////////////////////////
+    // ************************************************************************
     public Person(@NotNull String name, @NotNull String surname, @NotNull Calendar birthDay, @NotNull Address address) {
         this.name = name;
         this.surname = surname;
@@ -27,8 +25,9 @@ public class Person {
         this.birthDay.set(year, month - 1, day);
 
     }
-
-    /////////////////////////////////////////////////////////
+    // ************************************************************************
+    // getters and setters
+    // ************************************************************************
     public String getName() {
         return surname;
     }

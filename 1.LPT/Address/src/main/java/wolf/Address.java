@@ -48,9 +48,6 @@ public class Address {
         this.building = building;
     }
     //////////////////////////////////////////////////
-    public boolean equalCountries(Address otherAddress) {
-        return this.country.equals(otherAddress.country);
-    }
 
     public boolean equals(Object otherAddress) {
         if(!(otherAddress instanceof Address)) {

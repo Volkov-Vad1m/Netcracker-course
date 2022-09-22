@@ -82,6 +82,7 @@ public class Main {
             for (int j = i + 1; j < people.length; j++) {
                 if(people[i].getAddress().getStreet().
                         equals(people[j].getAddress().getStreet())) {
+                    System.out.print(people[i].getAddress().getStreet() + " :");
                     System.out.println(people[i] + ", " + people[j]);
                 }
             }

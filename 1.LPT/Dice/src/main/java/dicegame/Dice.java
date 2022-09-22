@@ -4,9 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Dice {
+    private final int roundsToWins = 7;
 
-    private Player[] players; //including pc
-    private int cubes;
+    private Player[] players;
+    private int cubes; // amount of cubes
 
 
     public Dice(int players, int cubes) {
@@ -20,7 +21,7 @@ public class Dice {
 
         this.cubes = cubes;
     }
-////////////////////////////////////////////////////////////////
+    // ************************************************************************
 
     /**
      * Main class method.
@@ -38,7 +39,7 @@ public class Dice {
                 } else {
                     System.out.print("PC: ");
                 }
-                System.out.println("the number " + player.getTossResult() + " dropped out on the dice");
+                System.out.println("the number " + player.getTossResult() + " has been dropped out on the dice");
             }
 
             endRound();
@@ -61,7 +62,7 @@ public class Dice {
      */
     private boolean someoneWon() {
         for(Player a : players) {
-            if(a.getScore() == 7) {
+            if(a.getScore() == roundsToWins) {
                 return true;
             }
         }
@@ -77,7 +78,7 @@ public class Dice {
         if (players[firstWinner].isReal()) {
             System.out.println("Player " + (players[firstWinner].getId()) + " won!");
         } else {
-            System.out.print("PC won!");
+            System.out.println("PC won!");
         }
 
         players[firstWinner].setScore(players[firstWinner].getScore() + 1);
@@ -105,7 +106,7 @@ public class Dice {
     /**
      * method prints scores
      */
-    private void dumpScores(){
+    private void dumpScores() {
         System.out.println("-----------------scores-----------------");
         for(Player player: players) {
             if(player.isReal()) {
