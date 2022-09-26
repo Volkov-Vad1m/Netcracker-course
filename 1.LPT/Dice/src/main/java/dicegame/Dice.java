@@ -1,7 +1,5 @@
 package dicegame;
 
-import java.util.ArrayList;
-import java.util.List;
 
 public class Dice {
     private final int roundsToWins = 7;
@@ -45,6 +43,7 @@ public class Dice {
             endRound();
         }
 
+        // someone won
         for(Player player : players) {
             if(player.getScore() == 7) {
                 if(player.isReal()) {
@@ -70,7 +69,8 @@ public class Dice {
     }
 
     /**
-     * This method ends round correctly. It prints who has won, sets scores, prints it and moves array of players.
+     * This method ends round correctly. It prints who has won, sets scores, 
+     * prints it and moves array of players.
      */
     private void endRound() {
         int firstWinner = indexMax();
@@ -88,7 +88,7 @@ public class Dice {
     }
 
     /**
-     * @return index of player, who had the highest toss result
+     * @return index of player, who had the highest toss result.
      */
     private int indexMax() {
 
@@ -104,7 +104,7 @@ public class Dice {
     }
 
     /**
-     * method prints scores
+     * Method prints scores.
      */
     private void dumpScores() {
         System.out.println("-----------------scores-----------------");

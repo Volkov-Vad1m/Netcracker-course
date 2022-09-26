@@ -55,7 +55,7 @@ public class Player {
         int result = 0;
         Random random = new Random();
 
-        for(int i = 0; i < cubes; i++) {
+        for (int i = 0; i < cubes; i++) {
             result = result + random.nextInt(6) + 1;
         }
 

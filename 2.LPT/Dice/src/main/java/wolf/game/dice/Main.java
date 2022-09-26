@@ -1,4 +1,4 @@
-package dicegame;
+package wolf.game.dice;
 
 import java.util.Scanner;
 
@@ -11,7 +11,7 @@ public class Main {
 
         System.out.println("How many cubes?");
         int cubes = in.nextInt();
-        Dice dealer = new Dice(players, cubes);
+        DiceGame dealer = new DiceGame(players, cubes);
         dealer.play();
     }
 }

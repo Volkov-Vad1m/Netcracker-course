@@ -8,14 +8,14 @@ public class Address {
     private String city;
     private String street;
     private String building;
-    //////////////////////////////////////////////////
+    // ************************************************************************
     public Address(@NotNull String country, @NotNull String city, @NotNull String street, @NotNull String building) {
         this.country = country;
         this.city = city;
         this.street = street;
         this.building = building;
     }
-    //////////////////////////////////////////////////
+    // ************************************************************************//
     public String getCountry() {
         return country;
     }
@@ -47,7 +47,7 @@ public class Address {
     public void setBuilding(String building) {
         this.building = building;
     }
-    //////////////////////////////////////////////////
+    // ************************************************************************
 
     public boolean equals(Object otherAddress) {
         if(!(otherAddress instanceof Address)) {
