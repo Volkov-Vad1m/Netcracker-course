@@ -1,6 +1,6 @@
 # Отчёт к учебному практическому заданию №2 #
 _Работу выполнил Волков Вадим, студент группы Б01-007_  
-Отчет лучше посмотреть на [`GitHub`](https://github.com/ksartamonov/Netcracker-Special-Course/tree/master/PracticalTask2). Там красивей...    
+Отчет лучше посмотреть на [`GitHub`](https://github.com/Volkov-Vad1m/Netcracker-course/blob/d70ab50f59803dedb99849b32986310b3041783a/2.LPT/report2.md). Там красивей...    
 Код [`тут`](https://github.com/Volkov-Vad1m/Netcracker-course/tree/master/2.LPT)  
 ## 1. Говорящие животные ##
 Необходимо реализовать следующую диаграмму классов:
