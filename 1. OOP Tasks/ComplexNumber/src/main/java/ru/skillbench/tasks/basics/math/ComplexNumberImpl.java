@@ -2,6 +2,8 @@ package ru.skillbench.tasks.basics.math;
 
 
 import java.util.Arrays;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class ComplexNumberImpl implements ComplexNumber{
     public final static double EPSILON = 10E-12;
@@ -66,7 +68,50 @@ public class ComplexNumberImpl implements ComplexNumber{
      */
     @Override
     public void set(String value) throws NumberFormatException {
-        //TODO
+        if (value.endsWith("i")) {
+            Pattern pattern = Pattern.compile("([+-]?\\d*\\.?\\d*)([+-]?\\d*\\.?\\d*)i",
+                    Pattern.CASE_INSENSITIVE | Pattern.DOTALL);
+            Matcher matcher = pattern.matcher(value);
+
+            if(matcher.matches()) {
+                String reStr = matcher.group(1);
+                String imStr = matcher.group(2);
+
+                if (reStr.equals("-")) {
+                    re = 0.0;
+                    im = -1.0;
+                } else if (reStr.equals("+")) {
+                    re = 0.0;
+                    im = 1.0;
+                } else {
+                    re = Double.parseDouble(reStr);
+
+                    if (imStr.equals("")) {
+                        im = re;
+                        re = 0.0;
+                    } else if (imStr.equals("-")) {
+                        im = -1.0;
+                    } else if (imStr.equals("+")) {
+                        im = 1.0;
+                    } else {
+                        im = Double.parseDouble(imStr);
+                    }
+                }
+            } else {
+                throw new NumberFormatException();
+            }
+        } else {
+            Pattern pattern = Pattern.compile("([+-]?\\d*\\.?\\d*)",
+                    Pattern.CASE_INSENSITIVE | Pattern.DOTALL);
+            Matcher matcher = pattern.matcher(value);
+
+            if(matcher.matches()) {
+                re = Double.parseDouble(matcher.group(1));
+                im = 0.0;
+            } else {
+                throw new NumberFormatException();
+            }
+        }
 
     }
 
@@ -98,6 +143,15 @@ public class ComplexNumberImpl implements ComplexNumber{
         return (ComplexNumber) super.clone();
     }
 
+    @Override
+    public boolean equals(Object other) {
+        if (other instanceof ComplexNumber) {
+            return (compareTo((ComplexNumber) other) == 0) ? true : false;
+        } else {
+            return false;
+        }
+    }
+    
     /**
      * Compares this number with the other number by the absolute values of the numbers:
      * x < y if and only if |x| < |y| where |x| denotes absolute value (modulus) of x.<br/>
