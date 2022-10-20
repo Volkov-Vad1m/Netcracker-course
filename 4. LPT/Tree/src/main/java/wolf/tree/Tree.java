@@ -197,9 +197,10 @@ public class Tree<T extends Comparable<T>> {
     }
 
     private int sizeRecursively(Node<T> node) {
-        if (node == null || node.getLeftChild() == null && node.getRightChild() == null) {
+        if (node == null || isLast(node)) {
             return 0;
         }
+        
         return 1 + Math.max(sizeRecursively(node.getLeftChild()), sizeRecursively(node.getRightChild()));
     }
 

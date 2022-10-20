@@ -1,6 +1,6 @@
 package wolf.tree;
 
-public class Node<T extends Comparable> {
+public class Node<T extends Comparable<T>> {
 
     private T value;
     private Node<T> leftChild;
@@ -32,5 +32,10 @@ public class Node<T extends Comparable> {
 
     public void setRightChild(Node<T> rightChild) {
         this.rightChild = rightChild;
+    }
+
+    @Override
+    public String toString() {
+        return value.toString();
     }
 }
