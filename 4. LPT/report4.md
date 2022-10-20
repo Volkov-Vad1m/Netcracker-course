@@ -24,7 +24,7 @@ _Работу выполнил Волков Вадим, студент груп�
 ```
 
 Напишем метод __toString()__, возвращающий строковое представление даты рождения по вводимому в метод формату даты.
-Формат даты, который понимает метод __toString(pattern)__ такой же, как и у [`SimpleDateFormat`](https://docs.oracle.com/javase/7/docs/api/java/text/SimpleDateFormat.html#format(java.util.Date,%20java.lang.StringBuffer,%20java.text.FieldPosition)).
+Формат даты, который понимает метод __toString(pattern)__ такой же, как и у [`SimpleDateFormat`](https://docs.oracle.com/javase/7/docs/api/java/text/SimpleDateFormat.html).
 ```java
     @Override
     public String toString() {
@@ -275,7 +275,7 @@ private Node<T> findSmallestNode(Node<T> node) {
 }
 ```
 
-Теперь реализуем различные методы обхода дерева:
+Теперь реализуем различные методы обхода дерева:  
 Прямой метод обхода:
 ```java
 public List<T> preorder() {
