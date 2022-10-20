@@ -1,14 +1,20 @@
 package ru.skillbench.tasks.text;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.time.Period;
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
-public class ContactCardImpl implements ContactCard{
+public class ContactCardImpl implements ContactCard {
 
     private String fullName;
     private String organisation;
-    private String birthDay;
-    List<String> telethons;
+    private String gender;
+    private Calendar birthDay;
+    private final HashMap<String, String> telephones = new HashMap<>();
 
     /**
      * Основной метод парсинга: создает экземпляр карточки из источника данных (Scanner),
@@ -52,8 +58,105 @@ public class ContactCardImpl implements ContactCard{
      */
     @Override
     public ContactCard getInstance(Scanner scanner) {
+        Pattern pattern;
+        Matcher matcher;
 
-        return null;
+        String currentLine = scanner.nextLine();
+
+
+        pattern = Pattern.compile("BEGIN:VCARD");
+        matcher = pattern.matcher(currentLine);
+        if (matcher.find()) {
+            currentLine = scanner.nextLine();
+        } else {
+            throw new NoSuchElementException();
+        }
+
+        pattern = Pattern.compile("FN:");
+        matcher = pattern.matcher(currentLine);
+
+        if (matcher.find()) {
+            fullName = currentLine.substring("FN:".length());
+            currentLine = scanner.nextLine();
+        } else {
+            throw new NoSuchElementException();
+        }
+
+        pattern = Pattern.compile("ORG:");
+        matcher = pattern.matcher(currentLine);
+
+        if (matcher.find()) {
+            organisation = currentLine.substring("ORG:".length()).trim();
+            currentLine = scanner.nextLine();
+        } else {
+            throw new NoSuchElementException();
+        }
+
+        pattern = Pattern.compile("GENDER:[MF]$");
+        matcher = Pattern.compile("GENDER:").matcher(currentLine);
+
+        if (matcher.find()) {
+            matcher = pattern.matcher(currentLine);
+
+            if (matcher.find()) {
+                gender = currentLine.substring("GENDER:".length()).trim();
+                currentLine = scanner.nextLine();
+            } else {
+                throw new InputMismatchException();
+            }
+        }
+
+        pattern = Pattern.compile("BDAY:\\d{2}-\\d{2}-\\d{4}$");
+        matcher = Pattern.compile("BDAY:").matcher(currentLine);
+
+        if (matcher.find()) {
+            matcher = pattern.matcher(currentLine);
+            if (matcher.find()) {
+                String date = currentLine.substring("BDAY:".length()).trim();
+                currentLine = scanner.nextLine();
+                SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+                birthDay = new GregorianCalendar();
+
+                try {
+                    birthDay.setTime(sdf.parse(date));
+                } catch (ParseException e) {
+                    throw new InputMismatchException();
+                }
+            } else {
+                throw new InputMismatchException();
+            }
+
+        }
+
+        pattern = Pattern.compile("TEL;TYPE=([a-zA-Z]+):");
+        matcher = pattern.matcher(currentLine);
+        Pattern specialPattern = Pattern.compile("TEL;TYPE=([a-zA-Z]+):(\\d{10})$");
+        Matcher specialMatcher = specialPattern.matcher(currentLine);
+        while (matcher.find()) {
+            if (specialMatcher.find()) {
+
+                String key = currentLine.substring("TEL;TYPE=".length(), currentLine.indexOf(':'));
+                String value = currentLine.substring(currentLine.indexOf(':') + 1);
+                telephones.put(key, value);
+
+                currentLine = scanner.nextLine();
+                matcher = pattern.matcher(currentLine);
+                specialMatcher = specialPattern.matcher(currentLine);
+
+            } else {
+                throw new InputMismatchException();
+            }
+
+
+        }
+
+        pattern = Pattern.compile("END:VCARD$");
+        matcher = pattern.matcher(currentLine);
+        if (!matcher.find()) {
+            throw new NoSuchElementException();
+        }
+
+        return this;
     }
 
     /**
@@ -64,7 +167,7 @@ public class ContactCardImpl implements ContactCard{
      */
     @Override
     public ContactCard getInstance(String data) {
-        return null;
+        return getInstance(new Scanner(data));
     }
 
     /**
@@ -72,7 +175,7 @@ public class ContactCardImpl implements ContactCard{
      */
     @Override
     public String getFullName() {
-        return null;
+        return fullName;
     }
 
     /**
@@ -80,7 +183,7 @@ public class ContactCardImpl implements ContactCard{
      */
     @Override
     public String getOrganization() {
-        return null;
+        return organisation;
     }
 
     /**
@@ -90,7 +193,10 @@ public class ContactCardImpl implements ContactCard{
      */
     @Override
     public boolean isWoman() {
-        return false;
+        if (gender == null) {
+            return false;
+        }
+        return gender.equals("F");
     }
 
     /**
@@ -102,7 +208,10 @@ public class ContactCardImpl implements ContactCard{
      */
     @Override
     public Calendar getBirthday() {
-        return null;
+        if (birthDay == null) {
+            throw new NoSuchElementException();
+        }
+        return birthDay;
     }
 
     /**
@@ -113,7 +222,16 @@ public class ContactCardImpl implements ContactCard{
      */
     @Override
     public Period getAge() {
-        return null;
+        if (birthDay == null) {
+            throw new NoSuchElementException();
+        } else {
+            LocalDate startDate = LocalDate.of(birthDay.get(Calendar.YEAR),
+                    birthDay.get(Calendar.MONTH) + 1,
+                    birthDay.get(Calendar.DAY_OF_MONTH));
+
+            LocalDate endDate = LocalDate.now();
+            return Period.between(startDate, endDate);
+        }
     }
 
     /**
@@ -122,7 +240,7 @@ public class ContactCardImpl implements ContactCard{
      */
     @Override
     public int getAgeYears() {
-        return 0;
+        return this.getAge().getYears();
     }
 
     /**
@@ -134,6 +252,18 @@ public class ContactCardImpl implements ContactCard{
      */
     @Override
     public String getPhone(String type) {
-        return null;
+        if (telephones.isEmpty() || telephones.get(type) == null) {
+            throw new NoSuchElementException();
+        } else {
+            StringBuilder telephone = new StringBuilder(telephones.get(type));
+            StringBuilder result = new StringBuilder();
+            result.append("(").append(telephone.substring(0, 3)).append(") ");
+            result.append(telephone.substring(3, 6)).append("-");
+            result.append(telephone.substring(6, 10));
+
+            return new String(result);
+        }
+
     }
+
 }

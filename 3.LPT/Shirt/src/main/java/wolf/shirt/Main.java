@@ -19,7 +19,7 @@ public class Main {
         shirts[9] = "S010,Orange T-Shirt,Orange,S";
         shirts[10] = "S011,Maroon Polo Shirt,Maroon,S";
 
-        Shirt[] convertedShirts = Shirt.ConverterToShirt(shirts);
+        Shirt[] convertedShirts = Shirt.converterToShirt(shirts);
 
         for(Shirt shirt : convertedShirts) {
             System.out.println(shirt);

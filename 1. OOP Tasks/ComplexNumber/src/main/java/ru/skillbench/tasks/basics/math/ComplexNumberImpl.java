@@ -151,7 +151,7 @@ public class ComplexNumberImpl implements ComplexNumber{
             return false;
         }
     }
-    
+
     /**
      * Compares this number with the other number by the absolute values of the numbers:
      * x < y if and only if |x| < |y| where |x| denotes absolute value (modulus) of x.<br/>
@@ -223,5 +223,22 @@ public class ComplexNumberImpl implements ComplexNumber{
         this.re = this.re * arg2.getRe() - this.im * arg2.getIm();
         this.im = oldRe * arg2.getIm() + oldRe2 * this.im;
         return this;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder result = new StringBuilder();
+
+        if (im == 0.0) {
+            return result.append(re).toString();
+        } else if (re == 0.0) {
+            return result.append(im).append("i").toString();
+        } else {
+            result = result.append(re);
+            if (im > 0) {
+                result = result.append("+");
+            }
+            return result.append(im).append("i").toString();
+        }
     }
 }

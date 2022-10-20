@@ -1,5 +1,6 @@
 package ru.skillbench.tasks.text ;
 
+import java.text.ParseException;
 import java.time.Period;
 import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
@@ -74,7 +75,7 @@ public interface ContactCard{
      * @throws NoSuchElementException Возникает, если данные не содержат обязательных полей
      *                                (FN, ORG, BEGIN:VCARD, END:VCARD)
      */
-    public ContactCard getInstance(Scanner scanner);
+    public ContactCard getInstance(Scanner scanner) throws ParseException;
     /**
      * Метод создает {@link Scanner} и вызывает {@link #getInstance(Scanner)}
      * @param data Данные для разбора, имеющие формат, описанный в {@link #getInstance(Scanner)}

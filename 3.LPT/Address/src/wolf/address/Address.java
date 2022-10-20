@@ -15,22 +15,22 @@ public class Address {
     private String apartment;
 
     public Address(String country, String region, String city, String street, String house, String building, String apartment) {
-        this.country = country;
-        this.region = region;
-        this.city = city;
-        this.street = street;
-        this.house = house;
-        this.building = building;
-        this.apartment = apartment;
+        this.country = country.trim();
+        this.region = region.trim();
+        this.city = city.trim();
+        this.street = street.trim();
+        this.house = house.trim();
+        this.building = building.trim();
+        this.apartment = apartment.trim();
     }
     private Address(String[] attributes) {
-        this(attributes[0].trim(),
-                attributes[1].trim(),
-                attributes[2].trim(),
-                attributes[3].trim(),
-                attributes[4].trim(),
-                attributes[5].trim(),
-                attributes[6].trim());
+        this(attributes[0],
+                attributes[1],
+                attributes[2],
+                attributes[3],
+                attributes[4],
+                attributes[5],
+                attributes[6]);
     }
 
     public static Address toAddressSplit(String address) {

@@ -14,7 +14,7 @@ public class Shirt {
         this.size = size;
     }
 
-    public static Shirt[] ConverterToShirt(String[] stringShirts) {
+    public static Shirt[] converterToShirt(String[] stringShirts) {
 
         Shirt[] convertedShirts = new Shirt[stringShirts.length];
 
