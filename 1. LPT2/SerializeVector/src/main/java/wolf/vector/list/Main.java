@@ -1,21 +1,27 @@
-package wolf.vector.array;
+package wolf.vector.list;
 
 import wolf.vector.list.LinkedListVector;
 
 import java.io.*;
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.LinkedList;
+
 
 public class Main {
 
     public static void main(String[] args) {
-        ArrayVector<String> array = new ArrayVector<>("Hi", "my", "name" ,"is", "Vadim") ;
+        LinkedListVector<Double> list = new LinkedListVector<>();
+        for(int i = 0; i < 10; i++) {
+            list.add(i + 0d);
+        }
 
         // try to write
         try {
-            OutputStream file = new FileOutputStream("./src/main/resources/data_of_arr.txt");
+            OutputStream file = new FileOutputStream("./src/main/resources/data_of_list.txt");
             ObjectOutput objOut = new ObjectOutputStream(file);
 
-            array.writeArray(objOut);
+            list.writeList(objOut);
 
             file.close();
             objOut.close();
@@ -25,13 +31,13 @@ public class Main {
         }
 
         //try to read
-        ArrayVector<String> newArray = new ArrayVector<>();
+        LinkedListVector<Double> newList = new LinkedListVector<>();
         try {
-            InputStream file = new FileInputStream("./src/main/resources/data_of_arr.txt");
+            InputStream file = new FileInputStream("./src/main/resources/data_of_list.txt");
             ObjectInput objIn = new ObjectInputStream(file);
 
 
-            newArray.readList(objIn);
+            newList.readList(objIn);
 
             file.close();
             objIn.close();
@@ -40,7 +46,6 @@ public class Main {
 
         }
         // compare
-        System.out.println(array);
-        System.out.println(newArray);
+        System.out.println(newList.equals(list));
     }
 }
