@@ -352,7 +352,7 @@ public static void main(String[] args) {
 }
 ```
 
-### 4.2 DeserializeMyClassToBePersisted.java
+### 4.2 DeserializeMyClassToBePersisted
 В основном методе этого класса необходимо считать сериализованный класс и десериализовать его в экземпляр класса __MyClassToBePersisted__:
 ```java
     public static void main(String[] args) {
