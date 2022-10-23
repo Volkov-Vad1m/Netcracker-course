@@ -7,6 +7,9 @@ public class MyClassToBePersisted implements Serializable {
     private String profile;
     private String group;
 
+    public MyClassToBePersisted() {
+        this("", "");
+    }
     public MyClassToBePersisted(String profile, String group) {
         this.profile = profile;
         this.group = group;

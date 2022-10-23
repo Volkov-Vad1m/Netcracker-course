@@ -31,12 +31,13 @@ public class Main {
             ObjectInput objIn = new ObjectInputStream(file);
 
 
-            newArray.readList(objIn);
+            newArray.readArray(objIn);
 
             file.close();
             objIn.close();
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
+
 
         }
         // compare

@@ -14,6 +14,7 @@ public class SerializeMyClassToBePersisted {
 
             objOut.writeObject(obj);
 
+            objOut.close();
             out.close();
 
 

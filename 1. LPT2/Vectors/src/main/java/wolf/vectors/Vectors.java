@@ -1,12 +1,13 @@
 package wolf.vectors;
 
 import java.io.*;
+import java.util.List;
 import java.util.StringTokenizer;
 import java.util.Vector;
 
 public class Vectors {
 
-    public static void multiply(Vector<Double> v, double d) {
+    public static void multiply(List<Double> v, double d) {
         for(int i = 0; i < v.size(); i++) {
             v.set(i, v.get(i) * d);
         }
@@ -32,6 +33,7 @@ public class Vectors {
     }
 
     public static void outputVector(Vector<Double> v, OutputStream out) throws IOException {
+
         ObjectOutputStream objectOut = new ObjectOutputStream(out);
 
         objectOut.writeInt(v.size());
@@ -41,10 +43,10 @@ public class Vectors {
         }
 
         objectOut.close();
-
     }
 
     public static Vector<Double> inputVector(InputStream in) throws IOException {
+
         ObjectInputStream objectIn = new ObjectInputStream(in);
 
         if(objectIn.available() == 0) {
@@ -74,7 +76,7 @@ public class Vectors {
     }
 
     public static Vector<Double> readVector(Reader in) throws IOException {
-        if(in.ready()) {
+
             Vector<Double> v = new Vector<>();
 
             StreamTokenizer tokenizer = new StreamTokenizer(in);
@@ -89,10 +91,8 @@ public class Vectors {
 
             return v;
 
-        } else {
-            throw new RuntimeException("bad input");
-        }
     }
+
 
 
 }

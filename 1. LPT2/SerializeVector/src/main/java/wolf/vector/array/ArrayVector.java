@@ -19,7 +19,7 @@ public class ArrayVector<T> {
         out.writeObject(array);
     }
 
-    public void readList(ObjectInput in) throws IOException, ClassNotFoundException {
+    public void readArray(ObjectInput in) throws IOException, ClassNotFoundException {
         this.array =  (T[])in.readObject();
     }
 

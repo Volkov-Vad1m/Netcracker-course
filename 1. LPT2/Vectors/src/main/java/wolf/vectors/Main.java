@@ -7,25 +7,39 @@ public class Main {
 
     public static void main(String[] args) {
 
-        File file1 = new File("/home/vadim/курсы netcracker/задачи/1. LPT2/Vectors/src/main/resources/vector1_read");
-        File file1Out = new File("/home/vadim/курсы netcracker/задачи/1. LPT2/Vectors/src/main/resources/vector1_out");
         try {
-
-            FileReader reader = new FileReader(file1);
+            FileReader reader = new FileReader("./src/main/resources/vector1_read");
             Vector<Double> v = Vectors.readVector(reader);
+            reader.close();
 
-            FileOutputStream writer = new FileOutputStream(file1Out);
-            Vectors.outputVector(v, writer);
+            FileOutputStream out = new FileOutputStream("./src/main/resources/vector1_out");
+            Vectors.outputVector(v, out);
+            out.close();
 
-            FileInputStream readerFile = new FileInputStream(file1Out);
-            System.out.println(Vectors.inputVector(readerFile));
-
-
+            FileInputStream in = new FileInputStream("./src/main/resources/vector1_out");
+            System.out.println(Vectors.inputVector(in));
+            in.close();
 
         } catch (IOException e) {
             e.printStackTrace();
-        } finally {
+        }
 
+        try {
+
+            FileReader reader = new FileReader("./src/main/resources/vector1_read");
+            Vector<Double> v = Vectors.readVector(reader);
+            reader.close();
+
+            FileWriter writer = new FileWriter("./src/main/resources/vector1_write");
+            Vectors.writeVector(v, writer);
+            writer.close();
+
+            FileReader reader2 = new FileReader("./src/main/resources/vector1_write");
+            System.out.println(Vectors.readVector(reader2));
+            reader2.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
     }
